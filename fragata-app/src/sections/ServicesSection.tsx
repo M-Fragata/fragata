@@ -48,7 +48,7 @@ export function ServicesSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh]">
+    <section id="servicos" ref={sectionRef} className="relative h-[300vh]">
       {/* Expanding line - fixed in viewport, expands on scroll */}
       <div
         ref={lineRef}

@@ -147,7 +147,7 @@ export function Header() {
                 className={`
                   px-4 py-2 rounded-lg active:scale-95 transition-all
                   ${isActive(item.href)
-                    ? 'text-primary font-bold border-b-2 border-primary bg-primary-container/20 rounded-t-lg'
+                    ? 'text-primary font-bold border-b-2 border-primary rounded-t-lg'
                     : 'text-on-surface-variant hover:text-primary hover:bg-primary-container/20'
                   }
                 `}

@@ -64,7 +64,7 @@ export function Header() {
   }, [])
 
   return (
-    <nav ref={navRef} className="fixed top-0 w-full z-50 shadow-sm">
+    <nav ref={navRef} className="fixed top-0 w-full z-50">
       <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1440px] mx-auto w-full">
         {/* Logo */}
         <div

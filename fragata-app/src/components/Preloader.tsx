@@ -6,7 +6,7 @@ interface PreloaderProps {
   minDuration?: number
 }
 
-const BAR_LENGTH = 30
+const BAR_LENGTH = 12
 
 export function Preloader({ onComplete, minDuration = 2500 }: PreloaderProps) {
   const containerRef = useRef<HTMLDivElement>(null)

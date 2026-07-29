@@ -128,7 +128,7 @@ export function Header() {
           ref={logoRef}
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          className="font-headline text-headline-md tracking-tighter text-primary font-bold hover:opacity-80 transition-opacity"
+          className="font-headline text-headline-md tracking-tighter text-primary font-bold hover:opacity-80 transition-opacity opacity-0"
         >
           FRAGATA
         </a>
@@ -136,7 +136,7 @@ export function Header() {
         {/* Desktop Navigation */}
         <div
           ref={navLinksRef}
-          className="hidden md:flex flex-grow justify-between items-center px-8 font-label text-label-md"
+          className="hidden md:flex flex-grow justify-between items-center px-8 font-label text-label-md opacity-0"
         >
           <div className="flex gap-md">
             {navItems.slice(0, 2).map((item) => (
@@ -180,13 +180,13 @@ export function Header() {
         {/* CTA Button */}
         <button
           ref={ctaRef}
-          className="primary-glow-button bg-primary-container text-white font-label text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hidden md:block"
+          className="primary-glow-button bg-primary-container text-white font-label text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hidden md:block opacity-0"
         >
           Contato
         </button>
 
         {/* Mobile Menu Icon */}
-        <button ref={mobileMenuRef} className="md:hidden text-primary">
+        <button ref={mobileMenuRef} className="md:hidden text-primary opacity-0">
           <svg
             className="w-6 h-6"
             fill="none"

@@ -113,7 +113,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <main className="fixed inset-0 z-10 flex flex-col justify-center px-4 sm:px-6 md:px-16 lg:px-margin-desktop max-w-[1440px] mx-auto w-full min-h-screen items-start">
+    <main id="home" className="fixed inset-0 z-10 flex flex-col justify-center px-4 sm:px-6 md:px-16 lg:px-margin-desktop max-w-[1440px] mx-auto w-full min-h-screen items-start">
       <div className="w-full md:w-[45%] text-center md:text-left">
         <div className="mb-6 md:mb-10 flex flex-col items-center md:items-start">
           <h1

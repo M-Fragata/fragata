@@ -113,19 +113,19 @@ export function HeroSection() {
   }, [])
 
   return (
-    <main className="relative z-10 flex flex-col justify-center px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full min-h-screen items-start">
+    <main className="fixed inset-0 z-10 flex flex-col justify-center px-4 sm:px-6 md:px-16 lg:px-margin-desktop max-w-[1440px] mx-auto w-full min-h-screen items-start">
       <div className="w-full md:w-[45%] text-center md:text-left">
-        <div className="mb-10 flex flex-col items-center md:items-start">
+        <div className="mb-6 md:mb-10 flex flex-col items-center md:items-start">
           <h1
             ref={titleRef}
-            className="text-7xl md:text-9xl font-bold text-primary tracking-tighter leading-none font-headline"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-primary tracking-tighter leading-none font-headline"
           >
             FRAGATA
           </h1>
           <div
             ref={subtitleRef}
-            className="w-full flex gap-3 text-white font-semibold uppercase text-3xl md:text-4xl mt-2 font-label"
-            style={{ letterSpacing: '0.3em' }}
+            className="w-full flex justify-center md:justify-start gap-2 sm:gap-5 text-white font-semibold uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-2 font-label"
+            style={{ letterSpacing: '0.2em' }}
           >
             <span className="subtitle-word">SOLUÇÕES</span>
             <span className="subtitle-word">DIGITAIS</span>
@@ -134,13 +134,13 @@ export function HeroSection() {
 
         <p
           ref={descriptionRef}
-          className="font-body text-body-lg text-secondary-fixed-dim/90 mb-10 max-w-2xl mx-auto md:mx-0"
+          className="font-body text-sm sm:text-base md:text-body-lg text-secondary-fixed-dim/90 mb-6 md:mb-10 max-w-2xl mx-auto md:mx-0"
         >
           Desenvolvimento de software sob medida, arquitetura de sistemas escaláveis e infraestrutura robusta para acelerar o seu negócio.
         </p>
 
-        <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
-          <button className="primary-glow-button bg-primary-container text-white font-label text-label-md px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 group">
+        <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center md:justify-start">
+          <button className="primary-glow-button bg-primary-container text-white font-label text-sm sm:text-label-md px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-2 group">
             Solicitar Orçamento
             <svg 
               className="w-4 h-4 group-hover:translate-x-1 transition-transform" 
@@ -151,7 +151,7 @@ export function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-          <button className="glass-outline-button text-secondary font-label text-label-md px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
+          <button className="glass-outline-button text-secondary font-label text-sm sm:text-label-md px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
             Conhecer Soluções
           </button>
         </div>

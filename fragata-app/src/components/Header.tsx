@@ -1,22 +1,52 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+
+const navItems = [
+  { label: 'Serviços', href: '#servicos' },
+  { label: 'Soluções', href: '#solucoes' },
+  { label: 'Sobre Nós', href: '#sobre' },
+  { label: 'Portfólio', href: '#portfolio' },
+]
 
 export function Header() {
   const navRef = useRef<HTMLElement>(null)
-  const logoRef = useRef<HTMLDivElement>(null)
+  const logoRef = useRef<HTMLAnchorElement>(null)
   const navLinksRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLButtonElement>(null)
   const mobileMenuRef = useRef<HTMLButtonElement>(null)
+  const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3
+
+      const sections = ['home', 'servicos', 'solucoes', 'sobre', 'portfolio']
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial states - hidden above
       gsap.set(logoRef.current, { opacity: 0, y: -30 })
       gsap.set(navLinksRef.current, { opacity: 0, y: -30 })
       gsap.set(ctaRef.current, { opacity: 0, y: -30 })
       gsap.set(mobileMenuRef.current, { opacity: 0, y: -30 })
 
-      // Animation timeline
       const tl = gsap.timeline({ delay: 0.2 })
 
       tl.to(logoRef.current, {
@@ -63,16 +93,45 @@ export function Header() {
     return () => ctx.revert()
   }, [])
 
+  const isActive = (href: string) => {
+    const sectionId = href.replace('#', '')
+    return activeSection === sectionId
+  }
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const sectionId = href.replace('#', '')
+
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
+    const element = document.getElementById(sectionId)
+    if (!element) return
+
+    const rect = element.getBoundingClientRect()
+    const sectionTop = rect.top + window.scrollY
+    const offset = window.innerHeight * 1
+
+    window.scrollTo({
+      top: sectionTop + offset,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <nav ref={navRef} className="fixed top-0 w-full z-50">
       <div className="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1440px] mx-auto w-full">
         {/* Logo */}
-        <div
+        <a
           ref={logoRef}
-          className="font-headline text-headline-md tracking-tighter text-primary font-bold"
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="font-headline text-headline-md tracking-tighter text-primary font-bold hover:opacity-80 transition-opacity"
         >
           FRAGATA
-        </div>
+        </a>
 
         {/* Desktop Navigation */}
         <div
@@ -80,33 +139,41 @@ export function Header() {
           className="hidden md:flex flex-grow justify-between items-center px-8 font-label text-label-md"
         >
           <div className="flex gap-md">
-            <a
-              className="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg active:scale-95 transition-transform"
-              href="#"
-            >
-              Serviços
-            </a>
-            <a
-              className="text-primary font-bold border-b-2 border-primary pb-1 px-4 py-2 hover:bg-primary-container/20 rounded-t-lg active:scale-95 transition-transform"
-              href="#"
-            >
-              Soluções
-            </a>
+            {navItems.slice(0, 2).map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`
+                  px-4 py-2 rounded-lg active:scale-95 transition-all
+                  ${isActive(item.href)
+                    ? 'text-primary font-bold border-b-2 border-primary bg-primary-container/20 rounded-t-lg'
+                    : 'text-on-surface-variant hover:text-primary hover:bg-primary-container/20'
+                  }
+                `}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
           <div className="w-32" />
           <div className="flex gap-md">
-            <a
-              className="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg active:scale-95 transition-transform"
-              href="#"
-            >
-              Sobre Nós
-            </a>
-            <a
-              className="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg active:scale-95 transition-transform"
-              href="#"
-            >
-              Portfólio
-            </a>
+            {navItems.slice(2).map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`
+                  px-4 py-2 rounded-lg active:scale-95 transition-all
+                  ${isActive(item.href)
+                    ? 'text-primary font-bold border-b-2 border-primary bg-primary-container/20 rounded-t-lg'
+                    : 'text-on-surface-variant hover:text-primary hover:bg-primary-container/20'
+                  }
+                `}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
 

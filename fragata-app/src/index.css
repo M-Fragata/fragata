@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Fragata High-Tech */
+  --color-background: #081421;
+  --color-surface: #081421;
+  --color-surface-dim: #081421;
+  --color-surface-bright: #2e3a48;
+  --color-surface-container-lowest: #040f1b;
+  --color-surface-container-low: #101c29;
+  --color-surface-container: #15202d;
+  --color-surface-container-high: #1f2b38;
+  --color-surface-container-highest: #2a3643;
+  --color-surface-variant: #2a3643;
+
+  --color-on-surface: #d7e3f5;
+  --color-on-surface-variant: #bfc7d1;
+  --color-inverse-surface: #d7e3f5;
+  --color-inverse-on-surface: #26313f;
+
+  --color-outline: #8a919b;
+  --color-outline-variant: #404850;
+
+  --color-primary: #94ccff;
+  --color-on-primary: #003352;
+  --color-primary-container: #0077b6;
+  --color-on-primary-container: #f3f7ff;
+  --color-inverse-primary: #006399;
+  --color-surface-tint: #94ccff;
+
+  --color-secondary: #83d3e1;
+  --color-on-secondary: #00363d;
+  --color-secondary-container: #006b78;
+  --color-on-secondary-container: #99e9f8;
+
+  --color-tertiary: #a5c8ff;
+  --color-on-tertiary: #00315f;
+  --color-tertiary-container: #4d73a7;
+  --color-on-tertiary-container: #f6f7ff;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  --color-primary-fixed: #cde5ff;
+  --color-primary-fixed-dim: #94ccff;
+  --color-on-primary-fixed: #001d32;
+  --color-on-primary-fixed-variant: #004b74;
+
+  --color-secondary-fixed: #9feffe;
+  --color-secondary-fixed-dim: #83d3e1;
+  --color-on-secondary-fixed: #001f24;
+  --color-on-secondary-fixed-variant: #004f59;
+
+  --color-tertiary-fixed: #d4e3ff;
+  --color-tertiary-fixed-dim: #a5c8ff;
+  --color-on-tertiary-fixed: #001c3a;
+  --color-on-tertiary-fixed-variant: #1e4879;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 12px;
+  --spacing-base: 8px;
+  --spacing-md: 24px;
+  --spacing-lg: 48px;
+  --spacing-xl: 80px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 64px;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-default: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Font Family */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-label: 'JetBrains Mono', monospace;
+
+  /* Font Sizes */
+  --text-display-lg: 48px;
+  --text-headline-lg: 32px;
+  --text-headline-md: 24px;
+  --text-body-lg: 18px;
+  --text-body-md: 16px;
+  --text-label-md: 14px;
+  --text-label-sm: 12px;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glass Panel Utility */
+.glass-panel {
+  background: rgba(0, 53, 102, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Primary Glow Button */
+.primary-glow-button {
+  box-shadow: 0 0 15px rgba(144, 224, 239, 0.4), inset 0 0 10px rgba(144, 224, 239, 0.2);
+  transition: all 0.3s ease;
+}
+
+.primary-glow-button:hover {
+  box-shadow: 0 0 25px rgba(144, 224, 239, 0.6), inset 0 0 15px rgba(144, 224, 239, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Glass Outline Button */
+.glass-outline-button {
+  background: rgba(8, 20, 33, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(144, 224, 239, 0.5);
+  transition: all 0.3s ease;
+}
+
+.glass-outline-button:hover {
+  background: rgba(144, 224, 239, 0.1);
+  box-shadow: 0 0 10px rgba(144, 224, 239, 0.2);
+}

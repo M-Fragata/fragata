@@ -1,0 +1,283 @@
+<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Fragata Soluções Digitais - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#d7e3f5",
+                      "on-tertiary-fixed": "#001c3a",
+                      "surface-bright": "#2e3a48",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "background": "#081421",
+                      "tertiary": "#a5c8ff",
+                      "on-primary": "#003352",
+                      "tertiary-container": "#4d73a7",
+                      "surface-variant": "#2a3643",
+                      "surface-container-high": "#1f2b38",
+                      "outline": "#8a919b",
+                      "on-tertiary-fixed-variant": "#1e4879",
+                      "secondary": "#83d3e1",
+                      "on-tertiary-container": "#f6f7ff",
+                      "primary-fixed-dim": "#94ccff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "surface-container-lowest": "#040f1b",
+                      "tertiary-fixed-dim": "#a5c8ff",
+                      "surface-container": "#15202d",
+                      "secondary-container": "#006b78",
+                      "primary-fixed": "#cde5ff",
+                      "on-background": "#d7e3f5",
+                      "surface-container-highest": "#2a3643",
+                      "on-secondary-fixed": "#001f24",
+                      "on-primary-fixed-variant": "#004b74",
+                      "on-secondary-fixed-variant": "#004f59",
+                      "outline-variant": "#404850",
+                      "on-error-container": "#ffdad6",
+                      "surface": "#081421",
+                      "on-tertiary": "#00315f",
+                      "on-secondary-container": "#99e9f8",
+                      "on-surface": "#d7e3f5",
+                      "on-surface-variant": "#bfc7d1",
+                      "surface-tint": "#94ccff",
+                      "secondary-fixed": "#9feffe",
+                      "surface-dim": "#081421",
+                      "primary-container": "#0077b6",
+                      "primary": "#94ccff",
+                      "on-secondary": "#00363d",
+                      "on-primary-container": "#f3f7ff",
+                      "secondary-fixed-dim": "#83d3e1",
+                      "inverse-primary": "#006399",
+                      "inverse-on-surface": "#26313f",
+                      "surface-container-low": "#101c29",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed": "#001d32"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "lg": "48px",
+                      "sm": "12px",
+                      "xl": "80px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "md": "24px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(0, 53, 102, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .primary-glow-button {
+            box-shadow: 0 0 15px rgba(144, 224, 239, 0.4), inset 0 0 10px rgba(144, 224, 239, 0.2);
+            transition: all 0.3s ease;
+        }
+        .primary-glow-button:hover {
+            box-shadow: 0 0 25px rgba(144, 224, 239, 0.6), inset 0 0 15px rgba(144, 224, 239, 0.3);
+            transform: translateY(-2px);
+        }
+        .glass-outline-button {
+            background: rgba(8, 20, 33, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(144, 224, 239, 0.5);
+            transition: all 0.3s ease;
+        }
+        .glass-outline-button:hover {
+            background: rgba(144, 224, 239, 0.1);
+            box-shadow: 0 0 10px rgba(144, 224, 239, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Background Image -->
+<div class="fixed inset-0 z-0 pointer-events-none bg-cover bg-center bg-no-repeat" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAsBst7wXZak6YYOd9QJzawkVx68TznYm4XPqJ2ntoaZSgfXAwSlJVYsqTrQ-D7SDfOISw5C3iOaJoEOFi-5dw04zcK1njmiddgZ1onqfGyN4sWx_8pQIn3FErbPVWynQcELgcVl75_7VaRoA_wTt8xOEbE-wH4KCObD4_QOMh0TknjmEyhW1FtcV6HLnugwPkNFNv7rVK7qFLYh9sYCCNBFy96wxoXlIhap9LS4sGS6bYYzSetdqi140Wh6vUUoB6ang');">
+<!-- Overlay gradient to ensure text readability -->
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/10 shadow-sm">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-[1440px] mx-auto w-full">
+<div class="font-headline-md text-headline-md tracking-tighter text-primary font-bold">
+                FRAGATA
+            </div>
+<div class="hidden md:flex flex-grow justify-between items-center px-8 font-label-md text-label-md">
+    <div class="flex gap-md">
+        <a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg duration-300 active:scale-95 transition-transform" href="#">Serviços</a>
+        <a class="text-primary font-bold border-b-2 border-primary pb-1 px-4 py-2 hover:bg-primary-container/20 rounded-t-lg duration-300 active:scale-95 transition-transform" href="#">Soluções</a>
+    </div>
+    <div class="w-32"></div>
+    <div class="flex gap-md">
+        <a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg duration-300 active:scale-95 transition-transform" href="#">Sobre Nós</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/20 px-4 py-2 rounded-lg duration-300 active:scale-95 transition-transform" href="#">Portfólio</a>
+    </div>
+</div>
+<button class="primary-glow-button bg-primary-container text-white font-label-md text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hidden md:block">
+                Contato
+            </button>
+<!-- Mobile Menu Icon (Visual Only) -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow relative z-10 flex flex-col mt-24 md:mt-32 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full min-h-[70vh] items-start">
+<div class="w-full md:w-[45%] text-center md:text-left">
+<div class="mb-10 flex flex-col items-center md:items-start">
+    <h1 class="text-9xl font-bold text-primary tracking-tighter leading-none">
+        FRAGATA
+    </h1>
+    <div class="w-full flex justify-between text-white font-semibold tracking-widest uppercase text-xl mt-2">
+        <span class="">S</span><span class="">O</span><span class="">L</span><span class="">U</span><span class="">Ç</span><span class="">Õ</span><span class="">E</span><span class="">S</span>
+        <span class="mx-2"></span>
+        <span class="">D</span><span class="">I</span><span class="">G</span><span class="">I</span><span class="">T</span><span class="">A</span><span class="">I</span><span class="">S</span>
+    </div>
+</div>
+<p class="font-body-lg text-body-lg text-secondary-fixed-dim/90 mb-10 max-w-2xl mx-auto md:mx-0">
+                Desenvolvimento de software sob medida, arquitetura de sistemas escaláveis e infraestrutura robusta para acelerar o seu negócio.
+            </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+<button class="primary-glow-button bg-primary-container text-white font-label-md text-label-md px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 group">
+                    Solicitar Orçamento
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+<button class="glass-outline-button text-secondary font-label-md text-label-md px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
+                    Conhecer Soluções
+                </button>
+</div>
+</div>
+<!-- Decorative Floating Cards -->
+<div class="hidden lg:grid grid-cols-2 gap-8 absolute bottom-12 right-margin-desktop w-[600px]">
+<!-- Card 1 -->
+
+<!-- Card 2 -->
+
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-10 w-full py-xl bg-surface-container-lowest border-t border-surface-variant mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-md max-w-[1440px] mx-auto">
+<div class="font-headline-sm text-headline-sm text-primary mb-4 md:mb-0">
+                FRAGATA
+            </div>
+<div class="font-body-md text-body-md text-on-surface-variant text-center md:text-left">
+                © 2024 FRAGATA. Transcendendo os limites do código.
+            </div>
+<div class="flex gap-md font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">
+                    Privacidade
+                </a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">
+                    Termos
+                </a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">
+                    Carreiras
+                </a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100 flex items-center gap-1" href="#">
+                    LinkedIn
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">open_in_new</span>
+</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -6,21 +6,19 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const squareRef = useRef<HTMLDivElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Start with scale approach - simpler and guaranteed centered
-      gsap.set(squareRef.current, {
-        width: 1,
-        height: 1,
-        top: '50%',
+      // Initial state - 100vw width but scaled to 0 (invisible)
+      gsap.set(lineRef.current, {
+        width: '100vw',
+        height: '100vh',
+        top: 0,
         left: '50%',
         xPercent: -50,
-        yPercent: -50,
-        borderRadius: 4,
+        scaleX: 0,
         opacity: 0,
-        scale: 1,
       })
 
       // Animation timeline
@@ -28,22 +26,20 @@ export function ServicesSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=300%',
+          end: '+=100%',
           scrub: 1.5,
         },
       })
 
       // Phase 1: Fade in
-      tl.to(squareRef.current, {
+      tl.to(lineRef.current, {
         opacity: 1,
         duration: 0.05,
       })
 
-      // Phase 2: Scale up to cover full viewport
-      // Using scale avoids width/height calculation issues
-      tl.to(squareRef.current, {
-        scale: 2000,
-        borderRadius: 0,
+      // Phase 2: Expand to full width using scaleX
+      tl.to(lineRef.current, {
+        scaleX: 1,
         duration: 1,
       })
     })
@@ -53,9 +49,9 @@ export function ServicesSection() {
 
   return (
     <section ref={sectionRef} className="relative h-[300vh]">
-      {/* Expanding square - fixed in viewport, grows on scroll */}
+      {/* Expanding line - fixed in viewport, expands on scroll */}
       <div
-        ref={squareRef}
+        ref={lineRef}
         className="fixed z-40 pointer-events-none"
         style={{
           background: 'linear-gradient(to bottom, #04090E 0%, #071423 100%)',

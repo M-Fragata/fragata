@@ -108,6 +108,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
 /* Glass Panel Utility */
 .glass-panel {
   background: rgba(0, 53, 102, 0.4);

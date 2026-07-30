@@ -82,8 +82,8 @@ export function ServicesSection() {
       phrasesEls.forEach((phrase, i) => {
         const chars = wordsElements[i]
         const enterAt = phraseDuration * i
-        const inDur = phraseDuration * 0.2
-        const outDur = phraseDuration * 0.2
+        const inDur = phraseDuration * 0.25
+        const outDur = phraseDuration * 0.25
 
         // Phrase container becomes visible
         tl.to(phrase, {
@@ -96,21 +96,21 @@ export function ServicesSection() {
           yPercent: 0,
           opacity: 1,
           duration: inDur,
-          stagger: inDur / (chars.length || 1) * 0.3,
+          stagger: inDur / (chars.length || 1) * 0.6,
           ease: 'power3.out',
         }, enterAt)
 
         if (i < totalPhrases - 1) {
-          // Chars exit with stagger — starts earlier (0.65) to complete before next phrase
+          // Chars exit with stagger — starts at 0.55 to complete before next phrase
           tl.to(chars, {
             yPercent: -120,
             opacity: 0,
             duration: outDur,
-            stagger: outDur / (chars.length || 1) * 0.3,
+            stagger: outDur / (chars.length || 1) * 0.6,
             ease: 'power3.in',
-          }, enterAt + phraseDuration * 0.65)
+          }, enterAt + phraseDuration * 0.55)
 
-          // Phrase container fades
+          // Phrase container fades after chars complete
           tl.to(phrase, {
             opacity: 0,
             duration: outDur * 0.1,

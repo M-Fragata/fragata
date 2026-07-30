@@ -1,15 +1,14 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+gsap.registerPlugin(ScrollTrigger)
 
 const phrases = [
-  'Sistemas Web de Alta Performance.',
-  'Interfaces Fluidas & Responsivas.',
-  'Arquiteturas Escaláveis em Nuvem.',
+  ['Sistemas Web', 'de Alta', 'Performance.'],
+  ['Interfaces', 'Fluidas &', 'Responsivas.'],
+  ['Arquiteturas', 'Escaláveis em', 'Nuvem.'],
 ]
 
 export function ServicesSection() {
@@ -22,17 +21,12 @@ export function ServicesSection() {
     const ctx = gsap.context(() => {
       const phrasesEls = phraseRefs.current.filter(Boolean) as HTMLDivElement[]
       const totalPhrases = phrasesEls.length
+      const charsElements: HTMLElement[][] = []
 
-      // --- Split each phrase into words ---
-      const splits: SplitText[] = []
-      const wordsElements: HTMLElement[][] = []
-
+      // --- Manual char split: select all .char elements within each phrase ---
       phrasesEls.forEach((phrase) => {
-        const h2 = phrase.querySelector('h2')
-        if (!h2) return
-        const split = new SplitText(h2, { type: 'chars' })
-        splits.push(split)
-        wordsElements.push(split.chars as HTMLElement[])
+        const chars = Array.from(phrase.querySelectorAll('.char')) as HTMLElement[]
+        charsElements.push(chars)
       })
 
       // --- Glow initial state: narrow, centered, invisible ---
@@ -45,7 +39,7 @@ export function ServicesSection() {
 
       // --- Set initial state: phrases invisible, chars below ---
       gsap.set(phrasesEls, { opacity: 0 })
-      wordsElements.forEach((chars) => {
+      charsElements.forEach((chars) => {
         gsap.set(chars, { yPercent: 120, opacity: 0 })
       })
 
@@ -80,7 +74,7 @@ export function ServicesSection() {
       const phraseDuration = 1 / totalPhrases
 
       phrasesEls.forEach((phrase, i) => {
-        const chars = wordsElements[i]
+        const chars = charsElements[i]
         const enterAt = phraseDuration * i
         const inDur = phraseDuration * 0.25
         const outDur = phraseDuration * 0.25
@@ -101,7 +95,7 @@ export function ServicesSection() {
         }, enterAt)
 
         if (i < totalPhrases - 1) {
-          // Chars exit with stagger — starts at 0.55 to complete before next phrase
+          // Chars exit with stagger
           tl.to(chars, {
             yPercent: -120,
             opacity: 0,
@@ -146,10 +140,18 @@ export function ServicesSection() {
               className="absolute inset-0 flex items-center justify-center px-8 opacity-0 overflow-hidden"
             >
               <h2
-                className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold text-white text-center tracking-tight max-w-5xl"
+                className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold text-white text-left tracking-tight"
                 style={{ textShadow: '0 0 40px rgba(0,0,0,0.6)' }}
               >
-                {phrase}
+                {phrase.map((line, li) => (
+                  <span key={li} className="block whitespace-nowrap overflow-hidden">
+                    {line.split('').map((char, ci) => (
+                      <span key={ci} className="char inline-block">
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    ))}
+                  </span>
+                ))}
               </h2>
             </div>
           ))}

@@ -180,7 +180,7 @@ export function Header() {
         {/* CTA Button */}
         <button
           ref={ctaRef}
-          className="primary-glow-button bg-primary-container text-white font-label text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hidden md:block opacity-0"
+          className="cursor-pointer primary-glow-button bg-primary-container text-white font-label text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform hidden md:block opacity-0"
         >
           Contato
         </button>

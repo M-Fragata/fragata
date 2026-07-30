@@ -82,6 +82,7 @@
   --font-headline: 'Space Grotesk', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-label: 'JetBrains Mono', monospace;
+  --font-syne: 'Syne', sans-serif;
 
   /* Font Sizes */
   --text-display-lg: 48px;
@@ -143,4 +144,9 @@ body {
 .glass-outline-button:hover {
   background: rgba(144, 224, 239, 0.1);
   box-shadow: 0 0 10px rgba(144, 224, 239, 0.2);
+}
+
+@keyframes column-pulse {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.95); }
+  50% { opacity: 0.8; transform: scaleY(1.05); }
 }

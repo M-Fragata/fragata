@@ -146,7 +146,7 @@ body {
   box-shadow: 0 0 10px rgba(144, 224, 239, 0.2);
 }
 
-@keyframes column-pulse {
-  0%, 100% { opacity: 0.2; transform: scaleY(0.95); }
-  50% { opacity: 0.8; transform: scaleY(1.05); }
+@keyframes column-wave {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.8; }
 }

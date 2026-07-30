@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const phrases = [
   'Sistemas Web de Alta Performance.',
@@ -22,6 +23,18 @@ export function ServicesSection() {
       const phrasesEls = phraseRefs.current.filter(Boolean) as HTMLDivElement[]
       const totalPhrases = phrasesEls.length
 
+      // --- Split each phrase into words ---
+      const splits: SplitText[] = []
+      const wordsElements: HTMLElement[][] = []
+
+      phrasesEls.forEach((phrase) => {
+        const h2 = phrase.querySelector('h2')
+        if (!h2) return
+        const split = new SplitText(h2, { type: 'chars' })
+        splits.push(split)
+        wordsElements.push(split.chars as HTMLElement[])
+      })
+
       // --- Glow initial state: narrow, centered, invisible ---
       gsap.set(glowRef.current, {
         opacity: 0,
@@ -30,10 +43,10 @@ export function ServicesSection() {
         xPercent: -50,
       })
 
-      gsap.set(phrasesEls, {
-        opacity: 0,
-        y: 60,
-        scale: 0.9,
+      // --- Set initial state: phrases invisible, chars below ---
+      gsap.set(phrasesEls, { opacity: 0 })
+      wordsElements.forEach((chars) => {
+        gsap.set(chars, { yPercent: 120, opacity: 0 })
       })
 
       // --- Glow transition: triggers on spacer, auto-completes (no pin, no scrub) ---
@@ -50,7 +63,7 @@ export function ServicesSection() {
         ease: 'power2.inOut',
       })
 
-      // --- Kinetic typography: pin + scrub on container (separate from glow) ---
+      // --- Kinetic typography: pin + scrub on container ---
       const totalScroll = totalPhrases
 
       const tl = gsap.timeline({
@@ -67,26 +80,41 @@ export function ServicesSection() {
       const phraseDuration = 1 / totalPhrases
 
       phrasesEls.forEach((phrase, i) => {
+        const chars = wordsElements[i]
         const enterAt = phraseDuration * i
         const inDur = phraseDuration * 0.2
         const outDur = phraseDuration * 0.2
 
+        // Phrase container becomes visible
         tl.to(phrase, {
           opacity: 1,
-          y: 0,
-          scale: 1,
+          duration: inDur * 0.1,
+        }, enterAt)
+
+        // Chars rise up with stagger
+        tl.to(chars, {
+          yPercent: 0,
+          opacity: 1,
           duration: inDur,
-          ease: 'power2.out',
+          stagger: inDur / (chars.length || 1) * 0.3,
+          ease: 'power3.out',
         }, enterAt)
 
         if (i < totalPhrases - 1) {
+          // Chars exit with stagger — starts earlier (0.65) to complete before next phrase
+          tl.to(chars, {
+            yPercent: -120,
+            opacity: 0,
+            duration: outDur,
+            stagger: outDur / (chars.length || 1) * 0.3,
+            ease: 'power3.in',
+          }, enterAt + phraseDuration * 0.65)
+
+          // Phrase container fades
           tl.to(phrase, {
             opacity: 0,
-            y: -60,
-            scale: 0.95,
-            duration: outDur,
-            ease: 'power2.in',
-          }, enterAt + phraseDuration * 0.75)
+            duration: outDur * 0.1,
+          }, enterAt + phraseDuration * 1)
         }
       })
     })
@@ -115,7 +143,7 @@ export function ServicesSection() {
             <div
               key={i}
               ref={(el) => { phraseRefs.current[i] = el }}
-              className="absolute inset-0 flex items-center justify-center px-8 opacity-0"
+              className="absolute inset-0 flex items-center justify-center px-8 opacity-0 overflow-hidden"
             >
               <h2
                 className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold text-white text-center tracking-tight max-w-5xl"

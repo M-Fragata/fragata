@@ -141,7 +141,6 @@ export function ServicesSection() {
             >
               <h2
                 className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold text-white text-left tracking-tight"
-                style={{ textShadow: '0 0 40px rgba(0,0,0,0.6)' }}
               >
                 {phrase.map((line, li) => (
                   <span key={li} className="block whitespace-nowrap overflow-hidden">

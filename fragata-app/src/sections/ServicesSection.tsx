@@ -1,38 +1,35 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
+import { ColumnFallTransition } from '../components/ColumnFallTransition'
+import { PortfolioSection } from './PortfolioSection'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+gsap.registerPlugin(ScrollTrigger)
 
 const phrases = [
-  ['Sistemas Web', 'de Alta', 'Performance'],
-  ['Interfaces', 'Fluidas &', 'Responsivas'],
-  ['Arquiteturas', 'Escaláveis', 'em Nuvem'],
+  ['Sistemas Web', 'de Alta', 'Performance.'],
+  ['Interfaces', 'Fluidas &', 'Responsivas.'],
+  ['Arquiteturas', 'Escaláveis', 'em Nuvem.'],
 ]
 
 export function ServicesSection() {
   const spacerRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const transitionTriggerRef = useRef<HTMLDivElement>(null)
   const phraseRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const phrasesEls = phraseRefs.current.filter(Boolean) as HTMLDivElement[]
       const totalPhrases = phrasesEls.length
+      const charsElements: HTMLElement[][] = []
 
-      // --- Split each phrase into words ---
-      const splits: SplitText[] = []
-      const wordsElements: HTMLElement[][] = []
-
+      // --- Manual char split: select all .char elements within each phrase ---
       phrasesEls.forEach((phrase) => {
-        const h2 = phrase.querySelector('h2')
-        if (!h2) return
-        const split = new SplitText(h2, { type: 'chars' })
-        splits.push(split)
-        wordsElements.push(split.chars as HTMLElement[])
+        const chars = Array.from(phrase.querySelectorAll('.char')) as HTMLElement[]
+        charsElements.push(chars)
       })
 
       // --- Glow initial state: narrow, centered, invisible ---
@@ -45,7 +42,7 @@ export function ServicesSection() {
 
       // --- Set initial state: phrases invisible, chars below ---
       gsap.set(phrasesEls, { opacity: 0 })
-      wordsElements.forEach((chars) => {
+      charsElements.forEach((chars) => {
         gsap.set(chars, { yPercent: 120, opacity: 0 })
       })
 
@@ -64,7 +61,8 @@ export function ServicesSection() {
       })
 
       // --- Kinetic typography: pin + scrub on container ---
-      const totalScroll = totalPhrases
+      // 3 frases + 1 fase de transição = 4 fases
+      const totalScroll = totalPhrases + 1
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -77,10 +75,10 @@ export function ServicesSection() {
         },
       })
 
-      const phraseDuration = 1 / totalPhrases
+      const phraseDuration = 1 / totalScroll
 
       phrasesEls.forEach((phrase, i) => {
-        const chars = wordsElements[i]
+        const chars = charsElements[i]
         const enterAt = phraseDuration * i
         const inDur = phraseDuration * 0.25
         const outDur = phraseDuration * 0.25
@@ -100,22 +98,21 @@ export function ServicesSection() {
           ease: 'power3.out',
         }, enterAt)
 
-        if (i < totalPhrases - 1) {
-          // Chars exit with stagger — starts at 0.55 to complete before next phrase
-          tl.to(chars, {
-            yPercent: -120,
-            opacity: 0,
-            duration: outDur,
-            stagger: outDur / (chars.length || 1) * 0.6,
-            ease: 'power3.in',
-          }, enterAt + phraseDuration * 0.55)
+        // Todas as frases saem (incluindo a última)
+        // Chars exit with stagger — starts at 0.55 to complete before next phase
+        tl.to(chars, {
+          yPercent: -120,
+          opacity: 0,
+          duration: outDur,
+          stagger: outDur / (chars.length || 1) * 0.6,
+          ease: 'power3.in',
+        }, enterAt + phraseDuration * 0.55)
 
-          // Phrase container fades after chars complete
-          tl.to(phrase, {
-            opacity: 0,
-            duration: outDur * 0.1,
-          }, enterAt + phraseDuration * 1)
-        }
+        // Phrase container fades after chars complete
+        tl.to(phrase, {
+          opacity: 0,
+          duration: outDur * 0.1,
+        }, enterAt + phraseDuration * 0.85)
       })
     })
 
@@ -163,6 +160,17 @@ export function ServicesSection() {
           ))}
         </section>
       </div>
+
+      {/* Transition trigger: 100vh extra for the fall transition */}
+      <div ref={transitionTriggerRef} className="h-screen w-full" />
+      
+      {/* Column Fall Transition */}
+      <ColumnFallTransition 
+        triggerRef={transitionTriggerRef}
+      />
+      
+      {/* Portfolio Section - appears after transition */}
+      <PortfolioSection />
     </>
   )
 }

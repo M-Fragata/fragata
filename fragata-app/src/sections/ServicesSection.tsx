@@ -62,7 +62,7 @@ export function ServicesSection() {
 
       // --- Kinetic typography: pin + scrub on container ---
       // 3 frases + espaço para a queda das colunas
-      const totalScroll = totalPhrases + 3
+      const totalScroll = 4
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -120,7 +120,7 @@ export function ServicesSection() {
 
       // --- Fall transition during last phase (0.75 to 1.0) ---
       if (fallTransition) {
-        const { container, columns, bg } = fallTransition
+        const { container, columns } = fallTransition
 
         // Set initial state: columns start above viewport, ready to fall
         gsap.set(columns, { yPercent: -100, opacity: 1 })
@@ -129,7 +129,7 @@ export function ServicesSection() {
         tl.to(container, {
           opacity: 1,
           duration: phraseDuration * 0.05,
-        }, phraseDuration * 2.95)
+        }, phraseDuration * 3)
 
         // Columns fall to cover the glow (yPercent: 0 = natural full-screen position)
         tl.to(columns, {
@@ -140,34 +140,10 @@ export function ServicesSection() {
             from: 'start',
           },
           ease: 'power3.in',
-        }, phraseDuration * 3.1)
-
-        // After all columns landed, show solid black bg to seal the transition
-        tl.to(bg, {
-          opacity: 1,
-          duration: phraseDuration * 0.05,
-        }, phraseDuration * 4.5)
-
-        // Fade out header when bg seals the transition
-        const headerEl = document.querySelector('nav')
-        if (headerEl) {
-          tl.to(headerEl, {
-            opacity: 0,
-            duration: phraseDuration * 0.1,
-          }, phraseDuration * 4.4)
-        }
-
-        // Ensure black background stays
-        tl.set(bg, { opacity: 1 }, phraseDuration * 4.55)
+        }, phraseDuration * 3.15)
 
         // Force container to stay visible after pin releases
-        tl.set(container, { opacity: 1 }, phraseDuration * 4.55)
-
-        // Fade out the glow overlay after bg seals the transition
-        tl.to(glowRef.current, {
-          opacity: 0,
-          duration: phraseDuration * 0.1,
-        }, phraseDuration * 4.55)
+        tl.set(container, { opacity: 1 }, phraseDuration * 4)
 
         // Hide ColumnFallTransition when PortfolioSection enters viewport
         const portfolioSection = document.getElementById('portfolio')

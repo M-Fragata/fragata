@@ -62,7 +62,7 @@ export function ServicesSection() {
 
       // --- Kinetic typography: pin + scrub on container ---
       // 3 frases + espaço para a queda das colunas
-      const totalScroll = 4
+      const totalScroll = 5
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -76,9 +76,6 @@ export function ServicesSection() {
       })
 
       const phraseDuration = 1 / totalScroll
-
-      // Get ref to fall transition
-      const fallTransition = fallTransitionRef.current
 
       phrasesEls.forEach((phrase, i) => {
         const chars = charsElements[i]
@@ -119,17 +116,15 @@ export function ServicesSection() {
       })
 
       // --- Fall transition during last phase (0.75 to 1.0) ---
+      const fallTransition = fallTransitionRef.current
       if (fallTransition) {
         const { container, columns } = fallTransition
 
+        // Container visible from start (scrub reverses it automatically)
+        tl.set(container, { opacity: 1 }, 0)
+
         // Set initial state: columns start above viewport, ready to fall
         gsap.set(columns, { yPercent: -100, opacity: 1 })
-
-        // Make the container visible (transparent overlay)
-        tl.to(container, {
-          opacity: 1,
-          duration: phraseDuration * 0.05,
-        }, phraseDuration * 3)
 
         // Columns fall to cover the glow (yPercent: 0 = natural full-screen position)
         tl.to(columns, {
@@ -142,23 +137,11 @@ export function ServicesSection() {
           ease: 'power3.in',
         }, phraseDuration * 3.15)
 
-        // Force container to stay visible after pin releases
-        tl.set(container, { opacity: 1 }, phraseDuration * 4)
-
-        // Hide ColumnFallTransition when PortfolioSection enters viewport
-        const portfolioSection = document.getElementById('portfolio')
-        if (portfolioSection) {
-          ScrollTrigger.create({
-            trigger: portfolioSection,
-            start: 'top 70%',
-            onEnter: () => {
-              gsap.to(container, { opacity: 0, duration: 0.5 })
-            },
-            onLeaveBack: () => {
-              gsap.to(container, { opacity: 1, duration: 0.3 })
-            },
-          })
-        }
+        // Fade out glow after columns seal the transition
+        tl.to(glowRef.current, {
+          opacity: 0,
+          duration: phraseDuration * 0.1,
+        }, phraseDuration * 4.7)
       }
     })
 

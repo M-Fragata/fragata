@@ -16,16 +16,15 @@ export function PortfolioSection() {
       if (!textEl) return
 
       const text = 'PORTFÓLIO'
-      textEl.innerHTML = text.split('').map((char, i) => 
+      textEl.innerHTML = text.split('').map((char, i) =>
         `<span class="char inline-block" style="--i:${i}">${char}</span>`
       ).join('')
 
       const chars = textEl.querySelectorAll('.char')
 
-      gsap.set(chars, { yPercent: 100, opacity: 0 })
+      gsap.set(chars, { opacity: 0 })
 
       gsap.to(chars, {
-        yPercent: 0,
         opacity: 1,
         duration: 1.2,
         stagger: 0.04,
@@ -45,7 +44,7 @@ export function PortfolioSection() {
     <div
       ref={containerRef}
       id="portfolio"
-      className="relative min-h-screen w-full flex items-center justify-center px-8 bg-[#020617]"
+      className="relative z-[65] min-h-screen w-full flex items-center justify-center px-8 bg-black"
     >
       <h1 className="font-syne font-extrabold text-white tracking-tight" style={{ fontSize: 'clamp(2rem, 10vw, 8rem)' }}>
         <span className="portfolio-text inline-block overflow-hidden">

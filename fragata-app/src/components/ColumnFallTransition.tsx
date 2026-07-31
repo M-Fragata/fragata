@@ -26,7 +26,7 @@ const ColumnFallTransition = forwardRef<ColumnFallTransitionRef, {}>(
     return (
       <div
         ref={containerRef}
-        className="fixed inset-0 z-[60] pointer-events-none overflow-hidden"
+        className="fixed inset-0 z-[40] pointer-events-none overflow-hidden"
         style={{ opacity: 0 }}
       >
         <div className="fall-bg absolute inset-0 bg-black opacity-0" />

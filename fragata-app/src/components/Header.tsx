@@ -25,7 +25,10 @@ export function Header() {
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
         if (element) {
-          const { offsetTop, offsetHeight } = element
+          // Use pin-spacer parent for GSAP-pinned sections
+          const pinSpacer = element.closest('.pin-spacer')
+          const target = pinSpacer || element
+          const { offsetTop, offsetHeight } = target
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(sectionId)
             break
@@ -110,12 +113,15 @@ export function Header() {
     const element = document.getElementById(sectionId)
     if (!element) return
 
-    const rect = element.getBoundingClientRect()
-    const sectionTop = rect.top + window.scrollY
-    const offset = window.innerHeight * 1
+    // GSAP pin spacers hold the correct offsetTop
+    const pinSpacer = element.closest('.pin-spacer')
+    const target = pinSpacer || element
+
+    // Small offset to enter the scrub so the first text is visible
+    const offset = window.innerHeight * 0.6
 
     window.scrollTo({
-      top: sectionTop + offset,
+      top: target.offsetTop + offset,
       behavior: 'smooth',
     })
   }

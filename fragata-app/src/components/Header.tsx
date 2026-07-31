@@ -3,9 +3,9 @@ import gsap from 'gsap'
 
 const navItems = [
   { label: 'Serviços', href: '#servicos' },
+  { label: 'Portfólio', href: '#portfolio' },
   { label: 'Soluções', href: '#solucoes' },
   { label: 'Sobre Nós', href: '#sobre' },
-  { label: 'Portfólio', href: '#portfolio' },
 ]
 
 export function Header() {
@@ -136,7 +136,7 @@ export function Header() {
         {/* Desktop Navigation */}
         <div
           ref={navLinksRef}
-          className="hidden md:flex flex-grow justify-between items-center px-8 font-label text-label-md opacity-0"
+          className="hidden md:flex grow justify-between items-center px-8 font-label text-label-md opacity-0"
         >
           <div className="flex gap-md">
             {navItems.slice(0, 2).map((item) => (
@@ -148,7 +148,7 @@ export function Header() {
                   px-4 py-2 rounded-lg active:scale-95 transition-all
                   ${isActive(item.href)
                     ? 'text-primary font-bold border-b-2 border-primary rounded-t-lg'
-                    : 'text-on-surface-variant hover:text-primary hover:bg-primary-container/20'
+                    : 'text-on-surface hover:text-primary hover:bg-primary-container/20'
                   }
                 `}
               >
@@ -166,8 +166,8 @@ export function Header() {
                 className={`
                   px-4 py-2 rounded-lg active:scale-95 transition-all
                   ${isActive(item.href)
-                    ? 'text-primary font-bold border-b-2 border-primary bg-primary-container/20 rounded-t-lg'
-                    : 'text-on-surface-variant hover:text-primary hover:bg-primary-container/20'
+                    ? 'text-primary font-bold border-b-2 border-primary rounded-t-lg'
+                    : 'text-on-surface hover:text-primary hover:bg-primary-container/20'
                   }
                 `}
               >

@@ -72,12 +72,6 @@ export function ServicesSection() {
           scrub: 0.5,
           pin: true,
           anticipatePin: 1,
-          onLeave: () => {
-            document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
-          },
-          onLeaveBack: () => {
-            gsap.to(glowRef.current, { opacity: 1, duration: 0.3 })
-          },
         },
       })
 
@@ -142,6 +136,9 @@ export function ServicesSection() {
           },
           ease: 'power3.in',
         }, phraseDuration * 3.15)
+
+        // Glow visible from start (scrub reverses it automatically)
+        tl.set(glowRef.current, { opacity: 1 }, 0)
 
         // Fade out glow after columns seal the transition
         tl.to(glowRef.current, {

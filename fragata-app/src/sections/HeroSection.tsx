@@ -162,7 +162,7 @@ export function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-          <button className="cursor-pointer glass-outline-button text-secondary font-label text-sm sm:text-label-md px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
+          <button className="cursor-pointer glass-outline-button text-white font-label text-sm sm:text-label-md px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-2">
             Conhecer Soluções
           </button>
         </div>

@@ -137,9 +137,6 @@ export function ServicesSection() {
           ease: 'power3.in',
         }, phraseDuration * 3.15)
 
-        // Glow visible from start (scrub reverses it automatically)
-        tl.set(glowRef.current, { opacity: 1 }, 0)
-
         // Fade out glow after columns seal the transition
         tl.to(glowRef.current, {
           opacity: 0,

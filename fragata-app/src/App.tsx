@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Header } from './components/Header'
 import { HeroSection } from './sections/HeroSection'
 import { ServicesSection } from './sections/ServicesSection'
+import { PortfolioSection } from './sections/PortfolioSection'
 import { Preloader } from './components/Preloader'
 import './App.css'
 
@@ -41,6 +42,7 @@ function App() {
       </div>
 
       {!isLoading && <ServicesSection />}
+      {!isLoading && <PortfolioSection />}
     </>
   )
 }

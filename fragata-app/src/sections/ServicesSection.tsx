@@ -23,7 +23,7 @@ export function ServicesSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const phrasesEls = phraseRefs.current.filter(Boolean) as HTMLDivElement[]
-      const totalPhrases = phrasesEls.length
+      //const totalPhrases = phrasesEls.length
       const charsElements: HTMLElement[][] = []
 
       // --- Manual char split: select all .char elements within each phrase ---

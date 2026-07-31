@@ -187,7 +187,7 @@ export function Header() {
 
         {/* Mobile Menu Icon*/}
 
-        <button ref={mobileMenuRef} className="md:hidden text-primary opacity-0">
+        <button ref={mobileMenuRef} className="md:hidden cursor-pointer primary-glow-button bg-primary-container text-white font-label text-label-md px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform opacity-0">
           Contato
         </button>
 

@@ -72,6 +72,12 @@ export function ServicesSection() {
           scrub: 0.5,
           pin: true,
           anticipatePin: 1,
+          onLeave: () => {
+            document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
+          },
+          onLeaveBack: () => {
+            gsap.to(glowRef.current, { opacity: 1, duration: 0.3 })
+          },
         },
       })
 

@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
 import { ColumnFallTransition } from '../components/ColumnFallTransition'
+import type { ColumnFallTransitionRef } from '../components/ColumnFallTransition'
 import { PortfolioSection } from './PortfolioSection'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -17,7 +18,7 @@ export function ServicesSection() {
   const spacerRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const transitionTriggerRef = useRef<HTMLDivElement>(null)
+  const fallTransitionRef = useRef<ColumnFallTransitionRef>(null)
   const phraseRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -61,8 +62,8 @@ export function ServicesSection() {
       })
 
       // --- Kinetic typography: pin + scrub on container ---
-      // 3 frases + 1 fase de transição = 4 fases
-      const totalScroll = totalPhrases + 1
+      // 3 frases + espaço para a queda das colunas
+      const totalScroll = totalPhrases + 3
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -76,6 +77,9 @@ export function ServicesSection() {
       })
 
       const phraseDuration = 1 / totalScroll
+
+      // Get ref to fall transition
+      const fallTransition = fallTransitionRef.current
 
       phrasesEls.forEach((phrase, i) => {
         const chars = charsElements[i]
@@ -114,6 +118,64 @@ export function ServicesSection() {
           duration: outDur * 0.1,
         }, enterAt + phraseDuration * 0.85)
       })
+
+      // --- Fall transition during last phase (0.75 to 1.0) ---
+      if (fallTransition) {
+        const { container, columns, bg } = fallTransition
+
+        // Set initial state: columns start above viewport, ready to fall
+        gsap.set(columns, { yPercent: -100, opacity: 1 })
+
+        // Make the container visible (transparent overlay)
+        tl.to(container, {
+          opacity: 1,
+          duration: phraseDuration * 0.05,
+        }, phraseDuration * 2.95)
+
+        // Columns fall to cover the glow (yPercent: 0 = natural full-screen position)
+        tl.to(columns, {
+          yPercent: 0,
+          duration: phraseDuration * 0.8,
+          stagger: {
+            each: phraseDuration * 0.8 / 12 * 0.8,
+            from: 'start',
+          },
+          ease: 'power3.in',
+        }, phraseDuration * 3.1)
+
+        // After all columns landed, show solid black bg to seal the transition
+        tl.to(bg, {
+          opacity: 1,
+          duration: phraseDuration * 0.05,
+        }, phraseDuration * 4.5)
+
+        // Fade out header when bg seals the transition
+        const headerEl = document.querySelector('nav')
+        if (headerEl) {
+          tl.to(headerEl, {
+            opacity: 0,
+            duration: phraseDuration * 0.1,
+          }, phraseDuration * 4.4)
+        }
+
+        // Ensure black background stays
+        tl.set(bg, { opacity: 1 }, phraseDuration * 4.55)
+
+        // Hide ColumnFallTransition when PortfolioSection enters viewport
+        const portfolioSection = document.getElementById('portfolio')
+        if (portfolioSection) {
+          ScrollTrigger.create({
+            trigger: portfolioSection,
+            start: 'top 90%',
+            onEnter: () => {
+              gsap.to(container, { opacity: 0, duration: 0.5 })
+            },
+            onLeaveBack: () => {
+              gsap.to(container, { opacity: 1, duration: 0.3 })
+            },
+          })
+        }
+      }
     })
 
     return () => ctx.revert()
@@ -161,13 +223,8 @@ export function ServicesSection() {
         </section>
       </div>
 
-      {/* Transition trigger: 100vh extra for the fall transition */}
-      <div ref={transitionTriggerRef} className="h-screen w-full" />
-      
-      {/* Column Fall Transition */}
-      <ColumnFallTransition 
-        triggerRef={transitionTriggerRef}
-      />
+      {/* Column Fall Transition - fixed to viewport, stays after pin */}
+      <ColumnFallTransition ref={fallTransitionRef} />
       
       {/* Portfolio Section - appears after transition */}
       <PortfolioSection />

@@ -8,6 +8,7 @@ import type { ColumnFallTransitionRef } from '../components/ColumnFallTransition
 gsap.registerPlugin(ScrollTrigger)
 
 const phrases = [
+  ['Serviços'],
   ['Sistemas Web', 'de Alta', 'Performance.'],
   ['Interfaces', 'Fluidas &', 'Responsivas.'],
   ['Arquiteturas', 'Escaláveis', 'em Nuvem.'],

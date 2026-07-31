@@ -185,7 +185,8 @@ export function Header() {
           Contato
         </button>
 
-        {/* Mobile Menu Icon */}
+        {/* Mobile Menu Icon 
+        
         <button ref={mobileMenuRef} className="md:hidden text-primary opacity-0">
           <svg
             className="w-6 h-6"
@@ -201,6 +202,7 @@ export function Header() {
             />
           </svg>
         </button>
+        */}
       </div>
     </nav>
   )

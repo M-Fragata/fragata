@@ -140,7 +140,8 @@ export function ServicesSection() {
               className="absolute inset-0 flex items-center justify-center px-8 opacity-0 overflow-hidden"
             >
               <h2
-                className="font-syne text-5xl md:text-7xl lg:text-8xl font-extrabold text-white text-left tracking-tight"
+                className="font-syne font-extrabold text-white text-left tracking-tight"
+                style={{ fontSize: 'clamp(1.75rem, 8vw, 7rem)' }}
               >
                 {phrase.map((line, li) => (
                   <span key={li} className="block whitespace-nowrap overflow-hidden">

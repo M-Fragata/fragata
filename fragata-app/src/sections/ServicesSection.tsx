@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
 import { ColumnFallTransition } from '../components/ColumnFallTransition'
 import type { ColumnFallTransitionRef } from '../components/ColumnFallTransition'
-import { PortfolioSection } from './PortfolioSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -161,12 +160,21 @@ export function ServicesSection() {
         // Ensure black background stays
         tl.set(bg, { opacity: 1 }, phraseDuration * 4.55)
 
+        // Force container to stay visible after pin releases
+        tl.set(container, { opacity: 1 }, phraseDuration * 4.55)
+
+        // Fade out the glow overlay after bg seals the transition
+        tl.to(glowRef.current, {
+          opacity: 0,
+          duration: phraseDuration * 0.1,
+        }, phraseDuration * 4.55)
+
         // Hide ColumnFallTransition when PortfolioSection enters viewport
         const portfolioSection = document.getElementById('portfolio')
         if (portfolioSection) {
           ScrollTrigger.create({
             trigger: portfolioSection,
-            start: 'top 90%',
+            start: 'top 70%',
             onEnter: () => {
               gsap.to(container, { opacity: 0, duration: 0.5 })
             },
@@ -225,9 +233,6 @@ export function ServicesSection() {
 
       {/* Column Fall Transition - fixed to viewport, stays after pin */}
       <ColumnFallTransition ref={fallTransitionRef} />
-      
-      {/* Portfolio Section - appears after transition */}
-      <PortfolioSection />
     </>
   )
 }

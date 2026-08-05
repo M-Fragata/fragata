@@ -70,8 +70,8 @@ export function ServicesSection() {
       })
 
       // --- Kinetic typography: pin + scrub on container ---
-      // 3 frases + espaço para a queda das colunas
-      const totalScroll = 5
+      // 4 fases: Serviços + 3 frases restantes
+      const totalScroll = 4
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -81,6 +81,44 @@ export function ServicesSection() {
           scrub: 0.5,
           pin: true,
           anticipatePin: 1,
+        },
+        onComplete: () => {
+          const fallTransition = fallTransitionRef.current
+          if (fallTransition) {
+            const { container, columns } = fallTransition
+
+            // Show container
+            gsap.set(container, { opacity: 1 })
+
+            // Set columns above viewport
+            gsap.set(columns, { yPercent: -100, opacity: 1 })
+
+            // Columns fall with auto-complete
+            gsap.to(columns, {
+              yPercent: 0,
+              duration: 1,
+              stagger: {
+                each: 1 / 12 * 0.8,
+                from: 'start',
+              },
+              ease: 'power3.in',
+              onComplete: () => {
+                // Fade out glow
+                gsap.to(glowRef.current, {
+                  opacity: 0,
+                  duration: 0.3,
+                  onComplete: () => {
+                    // Auto-scroll to PortfolioSection
+                    gsap.to(window, {
+                      scrollTo: { y: '+=' + window.innerHeight * 1.5, autoKill: false },
+                      duration: 1,
+                      ease: 'power2.inOut',
+                    })
+                  },
+                })
+              },
+            })
+          }
         },
       })
 
@@ -123,35 +161,6 @@ export function ServicesSection() {
           duration: outDur * 0.1,
         }, enterAt + phraseDuration * 0.85)
       })
-
-      // --- Fall transition during last phase (0.75 to 1.0) ---
-      const fallTransition = fallTransitionRef.current
-      if (fallTransition) {
-        const { container, columns } = fallTransition
-
-        // Container visible from start (scrub reverses it automatically)
-        tl.set(container, { opacity: 1 }, 0)
-
-        // Set initial state: columns start above viewport, ready to fall
-        gsap.set(columns, { yPercent: -100, opacity: 1 })
-
-        // Columns fall to cover the glow (yPercent: 0 = natural full-screen position)
-        tl.to(columns, {
-          yPercent: 0,
-          duration: phraseDuration * 0.8,
-          stagger: {
-            each: phraseDuration * 0.8 / 12 * 0.8,
-            from: 'start',
-          },
-          ease: 'power3.in',
-        }, phraseDuration * 3.15)
-
-        // Fade out glow after columns seal the transition
-        tl.to(glowRef.current, {
-          opacity: 0,
-          duration: phraseDuration * 0.1,
-        }, phraseDuration * 4.7)
-      }
     })
 
     return () => ctx.revert()

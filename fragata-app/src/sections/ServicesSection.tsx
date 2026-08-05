@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ColumnGlowBg } from '../components/ColumnGlowBg'
 import { ColumnFallTransition } from '../components/ColumnFallTransition'
 import type { ColumnFallTransitionRef } from '../components/ColumnFallTransition'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const phrases = [
   ['Serviços'],
@@ -59,6 +60,13 @@ export function ServicesSection() {
         width: '100vw',
         duration: 0.8,
         ease: 'power2.inOut',
+        onComplete: () => {
+          gsap.to(window, {
+            scrollTo: { y: '+=' + window.innerHeight * 1.3, autoKill: false },
+            duration: 1,
+            ease: 'power2.inOut',
+          })
+        },
       })
 
       // --- Kinetic typography: pin + scrub on container ---
